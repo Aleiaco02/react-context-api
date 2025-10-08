@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react"
+import { useBudget } from "../context/BudgetContext"
 import ProductCard from "./ProductCard";
 const ProductList = () => {
+
     const [items, setItems] = useState([]);
+
+    const filteredItems = [...items].filter((item) => item.price <= 30);
+
+    const { budgetMode } = useBudget();
+
 
     function fetchItems() {
         axios.get("https://fakestoreapi.com/products")
@@ -17,18 +24,13 @@ const ProductList = () => {
     console.log(items);
 
 
-    return (
-        <>
-            <div className="product-container">
-                {items.map((item) => (
-                    <ProductCard
-                        key={item.id}
-                        item={item}
-                    />
-                ))}
-            </div>
 
-        </>
+    return (
+        <div className="product-container">
+            {(budgetMode ? filteredItems : items).map((item) => (
+                <ProductCard key={item.id} item={item} />
+            ))}
+        </div>
     )
 }
 
