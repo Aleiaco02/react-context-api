@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const BudgetContext = createContext();
 
@@ -22,4 +22,9 @@ const BudgetProvider = ({ children }) => {
     )
 }
 
-export default BudgetContext
+const useBudget = () => {
+    const context = useContext(BudgetContext);
+    return context;
+};
+
+export default { BudgetProvider, useBudget };
