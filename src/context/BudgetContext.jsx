@@ -22,9 +22,7 @@ const BudgetProvider = ({ children }) => {
     )
 }
 
-const useBudget = () => {
-    const context = useContext(BudgetContext);
-    return context;
-};
+const useBudget = () => useContext(BudgetContext);
 
-export default { BudgetProvider, useBudget };
+export { BudgetProvider, useBudget }
+
